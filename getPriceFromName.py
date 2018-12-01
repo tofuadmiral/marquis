@@ -2,7 +2,7 @@
 def getPriceFromName(name):
     import requests
     import json
-
+    from getPrice import getPriceFromTicker
     from secret import clientId, clientSecret # we import client id and client secret mostly, those r the ones we want
 
     auth_data = {
@@ -29,13 +29,21 @@ def getPriceFromName(name):
 
     name_req_url = "https://api.marquee.gs.com/v1/assets/data/query"
 
+    # convert the name to string in case it isn't already a string
+    name=str(name)
+
     name_req_query = {
                     "where": {
                         "name": name
                     },
                     "fields": ["ticker"]
                }
-
     name_req = session.post(url=name_req_url, json=name_req_query)
     name_results= json.loads(name_req.text)
-    result=name_results["results"][0]["ticker"]
+    tickerresult=name_results["results"][0]["ticker"]
+    
+    tickerresult=str(tickerresult)
+
+    # now we have the ticker name stored in re sults, so get the price via the name
+    return(getPriceFromTicker(tickerresult))
+

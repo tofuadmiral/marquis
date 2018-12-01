@@ -6,6 +6,7 @@ import json
 from secret import clientId, clientSecret # we import client id and client secret mostly, those r the ones we want
 from tickerVals import *
 from getPrice import *
+from getPriceFromName import * 
 
 auth_data = {
     "grant_type"    : "client_credentials",
@@ -66,3 +67,11 @@ print ('  ________  ')
 stock_price = getPriceFromTicker(ticker_value)
 
 print(stock_price)
+
+
+print ('  ________  ')
+print ('  ________  ')
+print ('  ________  ')
+print ('  ________  ')
+
+print(getPriceFromName("Tesla Inc"))
