@@ -46,5 +46,19 @@ print ('  ________  ')
 
 print(results['data'][0]['date'])
 
+print ('  ________  ')
+print ('  ________  ')
+print ('  ________  ')
+print ('  ________  ')
 
-# make a script that gets you the 
+# now, let's map our gsids to our actual tickers and tosee performances 
+
+gsid_req_url = "https://api.marquee.gs.com/v1/assets/data/query"
+
+gsid_req_query = {
+                    "where": {
+                        "gsid": ["901237","11308","177256"]
+                    },
+                    "startDate": "2017-01-15",
+                    "endDate":"2018-01-15"
+               }
