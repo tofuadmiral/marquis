@@ -2,10 +2,7 @@ from app import app
 from flask import request, Flask
 from flask_restful import Resource, Api
 
-
-api.add_resource(Employees, '/employees') # Route_1
-api.add_resource(Tracks, '/tracks') # Route_2
-api.add_resource(Employees_Name, '/employees/<employee_id>') # Route_3
+from getPriceFromTicker import *
 
 @app.route('/')
 @app.route('/index')
@@ -24,3 +21,10 @@ def index():
         <h2> ''' + str(y+y) + ''' </h2> 
     </body>
 </html>'''
+
+
+@app.route('/chatbot/<messageText>')
+def processMessage(messageText):
+    price = getPriceFromTicker(messageText)    
+    price = str(price)
+    return price
