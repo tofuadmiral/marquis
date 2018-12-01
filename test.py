@@ -3,10 +3,12 @@
 import requests
 import json
 
+from secret import clientId, clientSecret # we import client id and client secret mostly, those r the ones we want
+
 auth_data = {
     "grant_type"    : "client_credentials",
-    "client_id"     : "YOUR_CLIENT_ID",
-    "client_secret" : "YOUR_CLIENT_SECRET",
+    "client_id"     : clientId,
+    "client_secret" : clientSecret,
     "scope"         : "read_product_data"
 }
 
@@ -32,3 +34,17 @@ request_query = {
 
 request = session.post(url=request_url, json=request_query)
 results = json.loads(request.text)
+
+print(results)
+
+print ('  ________  ')
+print ('  ________  ')
+print ('  ________  ')
+print ('  ________  ')
+
+# can successfully get the data and access certain keys
+
+print(results['data'][0]['date'])
+
+
+# make a script that gets you the 
