@@ -1,10 +1,7 @@
-# this code passes our identifier to the data service to obtain the data from the Query Data endpoint 
-
 import requests
 import json
 
 from secret import clientId, clientSecret # we import client id and client secret mostly, those r the ones we want
-from tickerVals import gsid_results
 
 auth_data = {
     "grant_type"    : "client_credentials",
@@ -23,33 +20,20 @@ access_token = access_token_dict["access_token"]
 # update session headers with access token
 session.headers.update({"Authorization":"Bearer "+ access_token})
 
-request_url = "https://api.marquee.gs.com/v1/data/USCANFPP_MINI/query"
+############################ ALL THE ABOVE WAS TO GET THE PERMISSIONS FROM THE SERVER ########################################
 
-request_query = {
+# now, let's map our gsids to our actual tickers and to see prices 
+
+gsid_req_url = "https://api.marquee.gs.com/v1/assets/data/query"
+
+gsid_req_query = {
                     "where": {
                         "gsid": ["901237","11308","177256"]
                     },
-                    "startDate": "2017-01-15",
-                    "endDate":"2018-01-15"
+                    "fields": ["ticker", "name"]
                }
 
-request = session.post(url=request_url, json=request_query)
-results = json.loads(request.text)
-
-print(results)
-
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
-
-# can successfully get the data and access certain keys
-
-print(results['data'][0]['date'])
-
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
+gsid_req = session.post(url=gsid_req_url, json=gsid_req_query)
+gsid_results= json.loads(gsid_req.text)
 
 print(gsid_results)
