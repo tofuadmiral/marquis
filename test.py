@@ -4,7 +4,8 @@ import requests
 import json
 
 from secret import clientId, clientSecret # we import client id and client secret mostly, those r the ones we want
-from tickerVals import gsid_results
+from tickerVals import *
+from getPrice import *
 
 auth_data = {
     "grant_type"    : "client_credentials",
@@ -52,4 +53,15 @@ print ('  ________  ')
 print ('  ________  ')
 print ('  ________  ')
 
-print(gsid_results)
+gsid=10516
+
+ticker_value = getTickerFromGsid(gsid)
+
+print ('  ________  ')
+print ('  ________  ')
+print ('  ________  ')
+print ('  ________  ')
+
+tickerval='TSLA'
+
+stock_price = getPriceFromTicker(tickerval)

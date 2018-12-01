@@ -24,16 +24,18 @@ session.headers.update({"Authorization":"Bearer "+ access_token})
 
 # now, let's map our gsids to our actual tickers and to see prices 
 
-gsid_req_url = "https://api.marquee.gs.com/v1/assets/data/query"
+# create a function to get the ticker value of a specific stock GSID
 
-gsid_req_query = {
+def getTickerFromGsid(gsid):
+    gsid_req_url = "https://api.marquee.gs.com/v1/assets/data/query"
+
+    gsid_req_query = {
                     "where": {
-                        "gsid": ["901237","11308","177256"]
+                        "gsid": gsid
                     },
-                    "fields": ["ticker", "name"]
+                    "fields": ["ticker"]
                }
 
-gsid_req = session.post(url=gsid_req_url, json=gsid_req_query)
-gsid_results= json.loads(gsid_req.text)
-
-print(gsid_results)
+    gsid_req = session.post(url=gsid_req_url, json=gsid_req_query)
+    gsid_results= json.loads(gsid_req.text)
+    return gsid_results
