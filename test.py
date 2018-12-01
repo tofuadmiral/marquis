@@ -62,6 +62,7 @@ print ('  ________  ')
 print ('  ________  ')
 print ('  ________  ')
 
-tickerval='TSLA'
 
-stock_price = getPriceFromTicker(tickerval)
+stock_price = getPriceFromTicker(ticker_value)
+
+print(stock_price)
