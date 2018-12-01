@@ -3,7 +3,7 @@
 import requests
 import json
 
-from secret import clientId, clientSecret # we import client id and client secret mostly, those r the ones we want
+from secret import clientId, clientSecret # we import client id and client secret 
 from tickerVals import *
 from getPrice import *
 from getPriceFromName import * 
@@ -37,13 +37,6 @@ request_query = {
 
 request = session.post(url=request_url, json=request_query)
 results = json.loads(request.text)
-
-print(results)
-
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
 
 # can successfully get the data and access certain keys
 
