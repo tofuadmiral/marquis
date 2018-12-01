@@ -11,6 +11,7 @@ The aim of Marquis is to equalize the investment landscape for those with limite
 ### Technology
 * Python backend
 * Marquee API from Goldman Sachs
+* Implemented frontend using Wixcode
 
 ### Next Steps
 
