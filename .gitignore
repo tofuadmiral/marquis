@@ -10,3 +10,6 @@ Thumbs.db
 
 # CUSTOM SECRET FILES # 
 secret.py
+
+# ignore node modules
+isaac/node_modules/*
