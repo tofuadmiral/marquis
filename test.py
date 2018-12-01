@@ -46,16 +46,16 @@ print ('  ________  ')
 
 # can successfully get the data and access certain keys
 
-print(results['data'][0]['date'])
-
 print ('  ________  ')
 print ('  ________  ')
 print ('  ________  ')
 print ('  ________  ')
 
-gsid=10516
+gsid='10516'
 
 ticker_value = getTickerFromGsid(gsid)
+
+print(ticker_value)
 
 print ('  ________  ')
 print ('  ________  ')

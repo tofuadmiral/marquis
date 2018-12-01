@@ -38,4 +38,5 @@ def getTickerFromGsid(gsid):
 
     gsid_req = session.post(url=gsid_req_url, json=gsid_req_query)
     gsid_results= json.loads(gsid_req.text)
-    return gsid_results
+    result=gsid_results["results"][0]["ticker"]
+    return result
