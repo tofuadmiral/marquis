@@ -67,4 +67,4 @@ print ('  ________  ')
 print ('  ________  ')
 print ('  ________  ')
 
-print(getPriceFromName("Tesla Inc"))
+print(getPriceFromName("Apple Inc"))
