@@ -1,4 +1,7 @@
 import webbrowser
+from iexfinance.stocks import Stock
+from getPrice import *
+
 
 new=2
 
@@ -39,10 +42,11 @@ def LemNormalize(text):
     return LemTokens(nltk.word_tokenize(text.lower().translate(remove_punct_dict)))
 
 
-GREETING_INPUTS = ("hello", "hi", "greetings", "sup", "what's up",)
+GREETING_INPUTS = ("hello", "hi", "greetings", "sup", "what's up","hey")
 GREETING_RESPONSES = ["hi", "hey", "*nods*", "hi there", "hello", "I am glad! You are talking to me"]
 
 PRICE_INPUTS= ("price","value","amount")
+STOCK_INPUTS=("tsla","fb","aapl","gs")
 PRICE_RESPONSES=("$35.00","$65.00","$85.00")
 
 
@@ -78,10 +82,14 @@ def greeting(sentence):
 
 # Checking for stock price
 def price(sentence):
-    
+##    
     for word in sentence.split():
         if word.lower() in PRICE_INPUTS:
-            return random.choice(PRICE_RESPONSES)
+            for word2 in sentence.split():
+                if word2.lower() in STOCK_INPUTS:
+                    return str(getPriceFromTicker(word2.lower()))
+                else:
+                    return ("Please enter a valid ticker symbol")
         
 def risk(sentence):
     
@@ -135,6 +143,9 @@ def links(sentence):
           
             
     return("Hope this helps")
+
+
+
 
             
 
