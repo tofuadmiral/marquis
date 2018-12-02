@@ -179,12 +179,17 @@ def response(user_response):
 risk_bool=False
 learn_bool=False
 
-flag=True
-print("TOSHI: My name is TOSHI. I am here to be your personal invesment helper. If you want to exit, type Bye!")
+def main1(user_response):
 
-while(flag==True):
-    user_response = input()
-    user_response=user_response.lower()
+    global risk_bool
+    global learn_bool
+
+    flag=True
+    
+
+    
+    ##    user_response = input()
+    ##    user_response=user_response.lower()
     if(user_response!='bye'):
         if(user_response=='thanks' or user_response=='thank you' ):
             flag=False
@@ -223,3 +228,4 @@ while(flag==True):
     else:
         flag=False
         print("TOSHI: Bye! take care..") 
+
