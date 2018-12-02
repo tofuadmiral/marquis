@@ -1,6 +1,7 @@
 import webbrowser
 from iexfinance.stocks import Stock
-from getPrice import *
+from getPriceFromTicker import *
+from test import *
 
 
 new=2
@@ -58,10 +59,12 @@ BUY_INPUTS=("buy","purchase")
 
 
 LEARN_INPUTS=("learn","hearing","learning","understand","knowledgable")
-
 LINKS_INPUTS=("stocks","stock","bonds","bond","cash equivalent","cash","general")
 
 
+PORTFOLIO_INPUTS=("see")
+
+GROWTH_INPUTS=("growth","grow","expand")
 
 
 
@@ -110,6 +113,21 @@ def learn(sentence):
     for word in sentence.split():
         if word.lower() in  LEARN_INPUTS:
             return ("What would you like to learn about? \n 1) Stocks \n 2) Bonds \n 3)Cash Equivalent \n 4)General Investment")
+
+def portfolio(sentence):
+    
+    for word in sentence.split():
+        if word.lower() in  PORTFOLIO_INPUTS:
+            return (getPortfolio())
+
+def growthRank(sentence):
+
+     for word in sentence.split():
+        if word.lower() in  GROWTH_INPUTS:
+            return (getSortedGrowths())
+            
+
+
             
 
 
@@ -179,17 +197,21 @@ def response(user_response):
 risk_bool=False
 learn_bool=False
 
-def main1(user_response):
 
-    global risk_bool
-    global learn_bool
 
-    flag=True
-    
+   
+flag=True
 
-    
-    ##    user_response = input()
-    ##    user_response=user_response.lower()
+print("********************************************************************************\n                         WELCOME TO MARQUIS                     \n********************************************************************************\n\n" ) 
+
+
+print("CHAT HERE\n-------------\n\n")
+
+print("Hello.. My Name is Toshi, welcome to your personalized investment experience")
+
+while(flag==True):
+    user_response = input()
+    user_response=user_response.lower()
     if(user_response!='bye'):
         if(user_response=='thanks' or user_response=='thank you' ):
             flag=False
@@ -197,24 +219,47 @@ def main1(user_response):
         else:
             if(greeting(user_response)!=None):
                 print("TOSHI: "+greeting(user_response))
-
+                print("\n")
+    
             elif(price(user_response)!=None):
                 print("TOSHI: "+price(user_response))
+                print("\n")
 
             elif(buy(user_response)!=None):
                 print("TOSHI: "+buy(user_response))
                 risk_bool=True
+                print("\n")
                 
             elif ((risk(user_response))!=None and risk_bool==True):
                 print("TOSHI: I would reccommend:\n "+risk(user_response))
+                print("\n")
 
             elif ((learn(user_response))!=None and learn_bool==False):
                 print("TOSHI: "+learn(user_response))
                 learn_bool=True
+                print("\n")
 
             elif ((links(user_response))!=None and learn_bool):
                 print("TOSHI:"+links(user_response))
                 learn_bool=False
+                print("\n")
+    
+            elif ((portfolio(user_response))!=None):
+                print("TOSHI:")
+                x=portfolio(user_response)
+                for i in x:
+                    print(i)
+                print("\n")
+                
+
+            elif (growthRank(user_response)):
+                print("TOSHI: Here is the rank of all of your investments growth: \n")
+                x=growthRank(user_response)
+                for i in x:
+                    print(i)
+                print("\n")
+        
+
                 
 
                 
@@ -228,4 +273,5 @@ def main1(user_response):
     else:
         flag=False
         print("TOSHI: Bye! take care..") 
+
 

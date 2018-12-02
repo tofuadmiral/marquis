@@ -5,7 +5,7 @@ import json
 
 from secret import clientId, clientSecret # we import client id and client secret 
 from tickerVals import *
-from getPrice import *
+from getPriceFromTicker import *
 from getPriceFromName import * 
 
 auth_data = {
@@ -29,42 +29,60 @@ request_url = "https://api.marquee.gs.com/v1/data/USCANFPP_MINI/query"
 
 request_query = {
                     "where": {
-                        "gsid": ["901237","11308","177256"]
+                        "gsid": ["10516","10696","11308","11896","13901"]
                     },
                     "startDate": "2017-01-15",
-                    "endDate":"2018-01-15"
+                    "endDate":"2017-01-16"
                }
 
 request = session.post(url=request_url, json=request_query)
 results = json.loads(request.text)
 
-# can successfully get the data and access certain keys
 
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
+def getSortedGrowths():
 
-gsid='10516'
+    global results
 
-ticker_value = getTickerFromGsid(gsid)
+    
+    gsids=["10516","10696","11308","11896","13901"]
 
-print(ticker_value)
+    scores=[]
+    sortd=[]
+    tickers=[]
 
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
-
-
-stock_price = getPriceFromTicker(ticker_value)
-
-print(stock_price)
+    for i in gsids:
+        tickers.append(getTickerFromGsid(i))
+        
+    for i in range (5):
+        scores.append(float(results['data'][i]['growthScore']))
 
 
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
-print ('  ________  ')
+    sortd=scores
 
-print(getPriceFromName("Apple Inc"))
+    sortd.sort(reverse=True)
+
+    final=[]
+
+    for i in range (5):
+        for j in range(5):
+            if (sortd[i]==scores[j]):
+                final.append(tickers[j]+'-->'+str(sortd[i]))
+
+    return final
+
+
+
+def getPortfolio():
+
+    gsids=["10516","10696","11308","11896","13901"]
+
+    scores=[]
+    sortd=[]
+    tickers=[]
+
+    for i in gsids:
+        tickers.append(getTickerFromGsid(i))
+    return tickers
+    
+    
+

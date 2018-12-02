@@ -2,7 +2,7 @@
 def getPriceFromName(name):
     import requests
     import json
-    from getPrice import getPriceFromTicker
+    from getPriceFromTicker import getPriceFromTicker
     from secret import clientId, clientSecret # we import client id and client secret mostly, those r the ones we want
 
     auth_data = {
