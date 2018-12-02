@@ -1,8 +1,9 @@
 from iexfinance import get_historical_data
 from datetime import datetime 
+from getTickerFromGsid import * 
 import pandas as pd 
-start=datetime.today()
-end=datetime(2017, 12, 1)
+import csv
+
 
 ######################################################  get goldman info 
 import requests
@@ -42,8 +43,26 @@ results = json.loads(request.text)
 gsids=[]
 for i in results['data']:
     if i['gsid'] not in gsids:
-        gsids.append(i['gsid'])
-
+        gsids.append(i['gsid']) # should be 100 stocks here! :)
 
 
 ############################################################################################################
+
+# write the gsids to a csv and write the ticker values
+tickers=[]
+for i in gsids:
+    tickers.append(getTickerFromGsid(i))
+
+
+## now we have tickers, so get historical pricing for each of the 100 stocks and store in dataframes
+
+# getting prices for the last year
+start=datetime(2017, 12, 1)
+end=datetime.today()
+
+prices=[]
+for i in tickers:
+    df = get_historical_data(i, start=start, end=end, output_format='pandas')
+    prices.append(df)
+
+
