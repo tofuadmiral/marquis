@@ -2,6 +2,7 @@ import webbrowser
 from iexfinance.stocks import Stock
 from getPriceFromTicker import *
 from test import *
+import pickle 
 
 
 new=2
@@ -57,6 +58,13 @@ RISK_OUTPUTS=("stock1","stock2","stock3")
 
 BUY_INPUTS=("buy","purchase")
 
+BUY1_INPUTS=("20","30","40","50","60","70")
+
+BUY2_INPUTS=("20000","30000","40000","50000","60000","70000")
+
+BUY3_INPUTS=("short","long")
+
+
 
 LEARN_INPUTS=("learn","hearing","learning","understand","knowledgable")
 LINKS_INPUTS=("stocks","stock","bonds","bond","cash equivalent","cash","general")
@@ -95,18 +103,95 @@ def price(sentence):
                     return ("Please enter a valid ticker symbol")
         
 def risk(sentence):
+
     
     for word in sentence.split():
         if word.lower() in RISK_INPUTS:
-            return random.choice(RISK_OUTPUTS)
+            
+            filename="./risks/classifiedRisks"
+            infile=open(filename, "rb")
+            crisks=pickle.load(infile)
+            infile.close()
+
+            filename2="./risks/tickers"
+            infile1=open(filename2, "rb")
+            tick=pickle.load(infile1)
+            infile1.close()
+
+            stocks=[]
+            x=0
+
+            if (word.lower()=="low"):
+                for i in crisks:
+                    if (i==1):
+                        stocks.append(tick[x])
+                    x=x+1
+
+            elif (word.lower()=="medium"):
+                for i in crisks:
+                    if (i==2):
+                        stocks.append(tick[x])
+                    x=x+1
+
+            elif (word.lower()=="high"):
+                for i in crisks:
+                    if (i==3):
+                        stocks.append(tick[x])
+                    x=x+1
+        
+                        
+
+    return stocks
+                        
+                        
+                    
+
+    
+risk_count=0
+
 
 
 def buy(sentence):
     
     for word in sentence.split():
         if word.lower() in  BUY_INPUTS:
-            return ("Okay..What level of risk are you willing to take (low, medium or high)?")
+            return ("Okay..We will need to run a quick risk tolerence assesment?\n Q1) How old are you?")
 
+def buy1(sentence):
+
+    global risk_count
+    
+    for word in sentence.split():
+        if word.lower() in  BUY1_INPUTS:
+
+            if(int(word.lower())<=30):
+                risk_count=risk_count+1
+            
+            return ("Q2) What is your annual income?")
+
+def buy2(sentence):
+
+    global risk_count
+    
+    for word in sentence.split():
+        if word.lower() in  BUY2_INPUTS:
+
+            if(int(word.lower())<=50000):
+                risk_count=risk_count+1
+            
+            return ("Q3) Are you looking for short term or long term gain?")
+
+def buy3(sentence):
+
+    global risk_count
+    
+    for word in sentence.split():
+        if word.lower() in  BUY3_INPUTS:
+
+            if(word.lower()=="short"):
+                risk_count=risk_count+1
+            
+            return ("Your Risk Assesment Has Beeen Complete!\n following are some reccomended stock quotes for your particular risk tolerence")
 
 def learn(sentence):
     
@@ -125,6 +210,8 @@ def growthRank(sentence):
      for word in sentence.split():
         if word.lower() in  GROWTH_INPUTS:
             return (getSortedGrowths())
+
+
             
 
 
@@ -209,7 +296,10 @@ print("CHAT HERE\n-------------\n\n")
 
 print("Hello.. My Name is Toshi, welcome to your personalized investment experience")
 
+
+
 while(flag==True):
+    print("Your Message:")
     user_response = input()
     user_response=user_response.lower()
     if(user_response!='bye'):
@@ -226,13 +316,46 @@ while(flag==True):
                 print("\n")
 
             elif(buy(user_response)!=None):
-                print("TOSHI: "+buy(user_response))
+                print("TOSHI: "+  str(buy(user_response)))
+                print("\n")
+
+            elif(buy1(user_response)!=None):
+                print("TOSHI: "+  buy1(user_response))
+                print("\n")
+
+            elif(buy2(user_response)!=None):
+                print("TOSHI: "+  buy2(user_response))
+                print("\n")
+
+            elif(buy3(user_response)!=None):
+                print("TOSHI: "+  buy3(user_response))
+
+
+                if (risk_count==1):
+                    l=risk("low")
+                    
+                elif(risk_count==2):
+                    l=risk("medium")
+                    
+                else:
+                    l=risk("high")
+
+                for i in l:
+                    print(i)
+
+                
                 risk_bool=True
                 print("\n")
                 
-            elif ((risk(user_response))!=None and risk_bool==True):
-                print("TOSHI: I would reccommend:\n "+risk(user_response))
-                print("\n")
+##            elif ((risk(user_response))!=None):
+##                print("TOSHI: I would reccommend the following stocks:\n ") 
+##                s=risk(user_response)
+##
+##                for i in s:
+##                    print(i)
+##                
+##                
+##                print("\n")
 
             elif ((learn(user_response))!=None and learn_bool==False):
                 print("TOSHI: "+learn(user_response))
