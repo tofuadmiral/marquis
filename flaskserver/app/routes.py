@@ -6,7 +6,7 @@ from getPriceFromTicker import *
 from bot import * 
 
 
-@app.route('/toshi/<messageText>')
+@app.route('/toshi/<messageText>', methods=['GET', 'POST'])
 def unpackMessage(messageText):
     print(messageText)
     x=main1(messageText)
