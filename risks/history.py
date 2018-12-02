@@ -5,6 +5,7 @@ import pandas as pd
 import csv
 import numpy as np
 import pickle
+import math
 
 ######################################################  get goldman info 
 import requests
@@ -80,11 +81,17 @@ for i in prices:
     counter=0
     sumdiffs=0
     for index, row in i.iterrows():
-        sumdiffs+=(row['open']-averages[counter])
+        sumdiffs+=(row['open']-averages[counter])**2
     counter+=1
-    risks.append(sumdiffs/(len(i.index)))
+    risks.append(math.sqrt(sumdiffs/(len(i.index))))
 
 print(risks[0])
+
+sum=0
+for i in risks:
+    sum+=i
+avgrisk=sum/len(risks)
+
 
 
 # store for further usage 
@@ -108,3 +115,4 @@ outfile=open('risks', 'wb')
 pickle.dump(risks, outfile)
 outfile.close()
 
+print('finished pickling')
