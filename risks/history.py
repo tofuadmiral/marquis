@@ -3,7 +3,8 @@ from datetime import datetime
 from getTickerFromGsid import * 
 import pandas as pd 
 import csv
-
+import numpy as np
+import pickle
 
 ######################################################  get goldman info 
 import requests
@@ -65,4 +66,45 @@ for i in tickers:
     df = get_historical_data(i, start=start, end=end, output_format='pandas')
     prices.append(df)
 
+# now we have all prices, so process it to get risk values. let's use std dev as a proxy for the risk
+averages=[]
+for i in prices:
+    sum=0
+    for index, row in i.iterrows(): # iterate over the rows
+        sum+=row['open']
+    averages.append(sum/(len(i.index)))
+
+# with averages, take the std deviations
+risks=[]
+for i in prices:
+    counter=0
+    sumdiffs=0
+    for index, row in i.iterrows():
+        sumdiffs+=(row['open']-averages[counter])
+    counter+=1
+    risks.append(sumdiffs/(len(i.index)))
+
+print(risks[0])
+
+
+# store for further usage 
+outfile=open('gsids', 'wb')
+pickle.dump(gsids, outfile)
+outfile.close()
+
+outfile=open('tickers', 'wb')
+pickle.dump(tickers, outfile)
+outfile.close()
+
+outfile=open('prices', 'wb')
+pickle.dump(prices, outfile)
+outfile.close()
+
+outfile=open('averages', 'wb')
+pickle.dump(averages, outfile)
+outfile.close()
+
+outfile=open('risks', 'wb')
+pickle.dump(risks, outfile)
+outfile.close()
 
