@@ -6,18 +6,8 @@ from getPriceFromTicker import *
 from bot import * 
 
 
-
 @app.route('/toshi/<messageText>')
 def unpackMessage(messageText):
+    print(messageText)
     x=main1(messageText)
-    return '''
-
- <html>
-            <head>
-                <title>Home Page - Microblog</title>
-            </head>
-            <body>
-                <h1> Welcome to Toshi! </h1>
-                <h2> ''' + x + '''</h2> 
-            </body>
-        </html>'''
+    return x
