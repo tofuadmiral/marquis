@@ -23,8 +23,21 @@ def index():
 </html>'''
 
 
-@app.route('/chatbot/<messageText>')
+@app.route('/chatbot/<messageText>')    
 def processMessage(messageText):
     price = getPriceFromTicker(messageText)    
     price = str(price)
-    return price
+    return '''
+        <html>
+            <head>
+                <title>Home Page - Microblog</title>
+            </head>
+            <body>
+                <h1> Welcome to Toshi! </h1>
+                <h2> The price of ''' + messageText + ''' stock is: ''' + price + '''</h2> 
+            </body>
+        </html>'''
+
+@app.rout('/toshi/<messageText>')
+def unpackMessage(messageText):
+    
