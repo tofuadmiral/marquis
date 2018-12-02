@@ -6,7 +6,7 @@ Marquis is tackling Goldman Sach's challenge at YHacks 2018 to utilize their GLo
 The aim of Marquis is to equalize the investment landscape for those with limited access to real time information.
 
 ### Marquis allows you to:
-* 
+* determine whether a company's stock is risky or safe to invest
 
 ### Technology
 * Python backend
