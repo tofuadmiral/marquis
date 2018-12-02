@@ -1,7 +1,7 @@
 # OS generated files #
 ######################
-.DS_Store
-.DS_Store?
+*.DS_Store
+*.DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
@@ -10,6 +10,8 @@ Thumbs.db
 
 # CUSTOM SECRET FILES # 
 secret.py
+/risks/secret.py
 
 # ignore node modules
 isaac/node_modules/*
+

@@ -1,0 +1,39 @@
+import wixData from 'wix-data';
+import { fetch, getJSON } from 'wix-fetch';
+
+// Updates read output upon new input to the data set 
+$w.onReady(() => {
+	$w("#usermessagewrite").onAfterSave(() => {
+		console.log("in onAfterSave", $w('#input1').value)
+
+		// For use in future implementation that contacts bot with input responses 
+		// fetch("http://localhost:5000/toshi/" + $w('#input1').value, { method: "get" })
+		// 	.then((httpResponse) => {
+		// 		return httpResponse.json();
+		// 	})
+		// 	.then(json => console.log(json.rates["USD"]))
+		// 	.catch(err => console.log(err));
+
+		$w("#usermessageread").refresh()
+			.then(() => {
+				console.log("Done refreshing the dataset");
+			});
+
+
+	});
+
+// Buttom implementation of a clear function that deletes all chat history from the data base  
+	$w("#button5").onClick((event) => {
+		let targetId = event.target.id; // 
+		wixData.query("UserMessage")
+			.find()
+			.then((result) => {
+				for (var i = 0; i < result.items.length; i++) {
+					if (result.items[i] === null) continue;
+					wixData.remove("UserMessage", result.items[i]._id);
+				}
+				console.log('erase done');
+			});
+	}); 
+
+});  
