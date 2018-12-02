@@ -17,6 +17,7 @@ infile.close()
 sum=0
 for i in risks:
     sum+=i
+    print(i)
 avgrisk=sum/(len(risks))
 
 print(avgrisk)
