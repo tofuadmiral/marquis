@@ -1,14 +1,12 @@
 # Toshi
  Toshi. A chatbot created at YHacks 2018 to tackle the Goldman Sachs Marquee API Challenge. Uses Natural Language Processing to give you access to real-time investment information, manage your portfolio, and analyze growth and risk.
  
- ## YHack 2018 -- Yale University 
- Toshi is tackling Goldman Sach's challenge at YHacks 2018 to utilize their Global Investment Research Factor Percentiles, as well as the Code for Good challenge and the JPMorgan and Chase accessibility challenge.
 
  ![Image Not Found](toshiabout.png)
 
 
  ## About
- The aim of Marquis is to equalize the investment landscape for those with limited access to real time information. Our chatbot is aimed to remove barriers to financial literacy by providing 4 key contact points.
+ The aim of Toshi is to equalize the investment landscape for those with limited access to real time information. Investing, no matter what your income is, improves your financial outcomes and is an indicator for a number of positive endpoints. To ensure everyone gets a chance to invest, our chatbot removes barriers to financial literacy by providing 4 key contact points.
 
 ### Toshi Encourages Financial Literacy via:
  * Education: Learn more about investments by asking Toshi simple questions
@@ -17,12 +15,18 @@
  * Risk Analysis: Analyze stocks according to risk! Toshi will even coduct a *risk tolerance survey* on you before you begin to invest, asking you questions like "What is your income?" and "What are your finnacial goals?"
  
  ![Image Not Found](botoutput.png)
+ 
+ ## YHack 2018 -- Yale University 
+ Toshi is tackling Goldman Sach's challenge at YHacks 2018 to utilize their Global Investment Research Factor Percentiles, as well as the Code for Good challenge and the JPMorgan and Chase accessibility challenge.
+
 
  ### Technology
  * Python backend
  * Marquee API from Goldman Sachs
  * Pricing information from IEX
  * NTLK for Natural language processing
+ 
+ 
 
  ### Next Steps
 
