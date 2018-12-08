@@ -24,7 +24,7 @@
  * Python backend
  * Marquee API from Goldman Sachs
  * Pricing information from IEX
- * NTLK for Natural language processing
+ * NLTK for Natural language processing
  
  
 
