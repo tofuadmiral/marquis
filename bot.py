@@ -290,12 +290,6 @@ learn_bool=False
    
 flag=True
 
-msg.append("********************************************************************************\n                         WELCOME TO MARQUIS                     \n********************************************************************************\n\n" )
-
-
-msg.append("CHAT HERE\n-------------\n\n")
-
-msg.append("Hello.. My Name is Toshi, welcome to your personalized investment experience")
 
 
 
