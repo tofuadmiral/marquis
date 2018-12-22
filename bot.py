@@ -290,8 +290,12 @@ learn_bool=False
    
 flag=True
 
+print("********************************************************************************\n                                  WELCOME TO Toshi                     \n********************************************************************************\n\n" )
 
 
+print("CHAT HERE\n-------------\n\n")
+
+print("Hello.. My Name is Toshi, welcome to your personalized investment experience")
 
 while(flag==True):
     msg.append("Your Message:")
