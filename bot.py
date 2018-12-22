@@ -3,7 +3,8 @@ from iexfinance.stocks import Stock
 from getPriceFromTicker import *
 from test import *
 import pickle 
-
+from flask import Flask 
+from flask_socketio import SocketIO, send
 
 new=2
 
@@ -296,39 +297,37 @@ print("CHAT HERE\n-------------\n\n")
 
 print("Hello.. My Name is Toshi, welcome to your personalized investment experience")
 
-
-
 while(flag==True):
-    print("Your Message:")
-    user_response = input()
-    user_response=user_response.lower()
-    if(user_response!='bye'):
-        if(user_response=='thanks' or user_response=='thank you' ):
+    msg.append("Your Message:")
+    msg[0] = input()
+    msg[0]=msg[0].lower()
+    if(msg[0]!='bye'):
+        if(msg[0]=='thanks' or msg[0]=='thank you' ):
             flag=False
-            print("TOSHI: You are welcome..")
+            msg.append("TOSHI: You are welcome..")
         else:
-            if(greeting(user_response)!=None):
-                print("TOSHI: "+greeting(user_response))
-                print("\n")
+            if(greeting(msg[0])!=None):
+                msg.append("TOSHI: "+greeting(msg[0]))
+                msg.append("\n")
     
-            elif(price(user_response)!=None):
-                print("TOSHI: "+price(user_response))
-                print("\n")
+            elif(price(msg[0])!=None):
+                msg.append("TOSHI: "+price(msg[0]))
+                msg.append("\n")
 
-            elif(buy(user_response)!=None):
-                print("TOSHI: "+  str(buy(user_response)))
-                print("\n")
+            elif(buy(msg[0])!=None):
+                msg.append("TOSHI: "+  str(buy(msg[0])))
+                msg.append("\n")
 
-            elif(buy1(user_response)!=None):
-                print("TOSHI: "+  buy1(user_response))
-                print("\n")
+            elif(buy1(msg[0])!=None):
+                msg.append("TOSHI: "+  buy1(msg[0]))
+                msg.append("\n")
 
-            elif(buy2(user_response)!=None):
-                print("TOSHI: "+  buy2(user_response))
-                print("\n")
+            elif(buy2(msg[0])!=None):
+                msg.append("TOSHI: "+  buy2(msg[0]))
+                msg.append("\n")
 
-            elif(buy3(user_response)!=None):
-                print("TOSHI: "+  buy3(user_response))
+            elif(buy3(msg[0])!=None):
+                msg.append("TOSHI: "+  buy3(msg[0]))
 
 
                 if (risk_count==1):
@@ -341,60 +340,61 @@ while(flag==True):
                     l=risk("high")
 
                 for i in l:
-                    print(i)
+                    msg.append(i)
 
                 
                 risk_bool=True
-                print("\n")
+                msg.append("\n")
                 
-##            elif ((risk(user_response))!=None):
-##                print("TOSHI: I would reccommend the following stocks:\n ") 
-##                s=risk(user_response)
+##            elif ((risk(msg[0]))!=None):
+##                msg.append("TOSHI: I would reccommend the following stocks:\n ")
+##                s=risk(msg[0])
 ##
 ##                for i in s:
-##                    print(i)
+##                    msg.append(i)
 ##                
 ##                
-##                print("\n")
+##                msg.append("\n")
 
-            elif ((learn(user_response))!=None and learn_bool==False):
-                print("TOSHI: "+learn(user_response))
+            elif ((learn(msg[0]))!=None and learn_bool==False):
+                msg.append("TOSHI: "+learn(msg[0]))
                 learn_bool=True
-                print("\n")
+                msg.append("\n")
 
-            elif ((links(user_response))!=None and learn_bool):
-                print("TOSHI:"+links(user_response))
+            elif ((links(msg[0]))!=None and learn_bool):
+                msg.append("TOSHI:"+links(msg[0]))
                 learn_bool=False
-                print("\n")
+                msg.append("\n")
     
-            elif ((portfolio(user_response))!=None):
-                print("TOSHI:")
-                x=portfolio(user_response)
+            elif ((portfolio(msg[0]))!=None):
+                msg.append("TOSHI:")
+                x=portfolio(msg[0])
                 for i in x:
-                    print(i)
-                print("\n")
+                    msg.append(i)
+                msg.append("\n")
                 
 
-            elif (growthRank(user_response)):
-                print("TOSHI: Here is the rank of all of your investments growth: \n")
-                x=growthRank(user_response)
+            elif (growthRank(msg[0])):
+                msg.append("TOSHI: Here is the rank of all of your investments growth: \n")
+                x=growthRank(msg[0])
                 for i in x:
-                    print(i)
-                print("\n")
+                    msg.append(i)
+                msg.append("\n")
         
 
                 
 
                 
             else:
-                sent_tokens.append(user_response)
-                word_tokens=word_tokens+nltk.word_tokenize(user_response)
+                sent_tokens.append(msg[0])
+                word_tokens=word_tokens+nltk.word_tokenize(msg[0])
                 final_words=list(set(word_tokens))
-                print("TOSHI: ",end="")
-                print(response(user_response))
-                sent_tokens.remove(user_response)
+                msg.append("TOSHI: ",end="")
+                msg.append ("Invalid comman")
+               # msg.append(response(msg[0]))
+                #sent_tokens.remove(msg[0])
     else:
         flag=False
-        print("TOSHI: Bye! take care..") 
+        msg.append("TOSHI: Bye! take care..")
 
 
